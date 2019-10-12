@@ -315,19 +315,19 @@ public class Analizador {
 		Statistic.getResults(testTimesResult);
 	}
 
-	private static List<IAlgoritmo> getAlgoritmos()
-	{
-		return Arrays.asList(
-			new Algoritmo1(), 
-			new AlgoritmoLogN(), 
-			new AlgoritmoN(), 
-			new AlgoritmoNLogN(), 
-			new AlgoritmoN2(),
-			new AlgoritmoN3(),
-			new Algoritmo2N(), 
-			new AlgoritmoNF()
-		);
-	}
+	// private static List<IAlgoritmo> getAlgoritmos()
+	// {
+	// 	return Arrays.asList(
+	// 		new Algoritmo1(), 
+	// 		new AlgoritmoLogN(), 
+	// 		new AlgoritmoN(), 
+	// 		new AlgoritmoNLogN(), 
+	// 		new AlgoritmoN2(),
+	// 		new AlgoritmoN3(),
+	// 		new Algoritmo2N(), 
+	// 		new AlgoritmoNF()
+	// 	);
+	// }
 	
 }
 
