@@ -212,7 +212,7 @@ public class Analizador {
 		new TestConfiguration(
 			20, 
 			new MultiplyBy(53_000_000), 
-			0.09, // CoefVariance: 0.10 aprox on 1
+			0.10, // CoefVariance: 0.10 aprox on 1
 			"1"
 		) 	
 	);
