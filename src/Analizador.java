@@ -34,36 +34,13 @@ public class Analizador {
 	// usar la desviacion o el ratio
 	private static class Statistic {
 
-		@SuppressWarnings("unchecked")
-		private static <T extends Number> T sum(List<T> values) {
-			Class<? extends Number> cls = values.get(0).getClass();
-			if (cls == Integer.class) {
-				T sum = (T) Integer.valueOf(0);
-
-				for (T val : values) {
-					sum = (T) Integer.valueOf(val.intValue() + (int) sum);
-				}
-				return sum;
-			} else if (cls == Long.class) {
-				T sum = (T) Long.valueOf(0);
-
-				for (T val : values) {
-					sum = (T) Long.valueOf(val.longValue() + (long) sum);
-				}
-				return sum;
-			} else {
-				T sum = (T) Double.valueOf(0);
-
-				for (T val : values) {
-					sum = (T) Double.valueOf(val.doubleValue() + (double) sum);
-				}
-				return sum;
-			}
-		}
-
 		public static double mean (List<Long> testTimes) 
 		{
-			return sum(testTimes) / testTimes.size();
+			Long sum = 0L;
+			for (Long val : testTimes) {
+				sum += val;
+			}
+			return sum / testTimes.size();
 
 			// Unsupported Code only Java 8 and above
 
@@ -80,7 +57,11 @@ public class Analizador {
 			for (Long val : testTimes) {
 				differenceFromMeanList.add(Math.pow(val - mean, 2));
 			}
-			double variance = sum(differenceFromMeanList) / (testTimes.size() - 1);
+			Double sum = 0.0;
+			for (Double val : differenceFromMeanList) {
+				sum += val;
+			}
+			double variance = sum / (testTimes.size() - 1);
 			return Math.sqrt(variance);
 
 			// Unsupported Code only Java 8 and above
