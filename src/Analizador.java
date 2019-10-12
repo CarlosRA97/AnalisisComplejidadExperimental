@@ -3,6 +3,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Collections;
 
 import javax.lang.model.util.ElementScanner6;
 
@@ -35,22 +36,61 @@ public class Analizador {
 	// usar la desviacion o el ratio
 	private static class Statistic {
 
+		@SuppressWarnings("unchecked")
+		private static <T extends Number> T sum(List<T> values) {
+			Class<? extends Number> cls = values.get(0).getClass();
+			if (cls == Integer.class) {
+				T sum = (T) Integer.valueOf(0);
+
+				for (T val : values) {
+					sum = (T) Integer.valueOf(val.intValue() + (int) sum);
+				}
+				return sum;
+			} else if (cls == Long.class) {
+				T sum = (T) Long.valueOf(0);
+
+				for (T val : values) {
+					sum = (T) Long.valueOf(val.longValue() + (long) sum);
+				}
+				return sum;
+			} else {
+				T sum = (T) Double.valueOf(0);
+
+				for (T val : values) {
+					sum = (T) Double.valueOf(val.doubleValue() + (double) sum);
+				}
+				return sum;
+			}
+		}
+
 		public static double mean (List<Long> testTimes) 
 		{
-			return testTimes.stream()
-				.mapToDouble(x -> (double) x)
-				.average()
-				.getAsDouble();
+			return sum(testTimes) / testTimes.size();
+
+			// Unsupported Code only Java 8 and above
+
+			// return testTimes.stream()
+			// 	.mapToDouble(x -> (double) x)
+			// 	.average()
+			// 	.getAsDouble();
 		}
 	
 		public static double standardDeviation (List<Long> testTimes) 
 		{
 			double mean = mean(testTimes);
-			double variance = testTimes.stream()
-				.mapToDouble(x -> (double) x)
-				.map(x -> Math.pow( x - mean, 2 ))
-				.sum() / (testTimes.size() - 1);
+			List<Double> differenceFromMeanList = new ArrayList<>();
+			for (Long val : testTimes) {
+				differenceFromMeanList.add(Math.pow(val - mean, 2));
+			}
+			double variance = sum(differenceFromMeanList) / (testTimes.size() - 1);
 			return Math.sqrt(variance);
+
+			// Unsupported Code only Java 8 and above
+			
+			// double variance = testTimes.stream()
+			// 	.mapToDouble(x -> (double) x)
+			// 	.map(x -> Math.pow( x - mean, 2 ))
+			// 	.sum() / (testTimes.size() - 1);
 		}
 		
 		public static double coefVariacion (List<Long> testTimes) 
@@ -238,7 +278,7 @@ public class Analizador {
 		} while (currentConfig < configurations.size() && timeExecuted < 600.0);
 
 		if (currentConfig == configurations.size()) {
-			config = cvDifferenceToAlgorithmRelation.get(cvDifferenceToAlgorithmRelation.keySet().stream().min(Double::compare).get());
+			config = cvDifferenceToAlgorithmRelation.get(Collections.min(cvDifferenceToAlgorithmRelation.keySet()));
 		}
 
 		System.out.println(config.getAlgorithmType());
