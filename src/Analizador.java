@@ -3,7 +3,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
+
+import javax.lang.model.util.ElementScanner6;
 
 public class Analizador {
 	
@@ -45,7 +46,7 @@ public class Analizador {
 		public static double standardDeviation (List<Long> testTimes) 
 		{
 			double mean = mean(testTimes);
-			var variance = testTimes.stream()
+			double variance = testTimes.stream()
 				.mapToDouble(x -> (double) x)
 				.map(x -> Math.pow( x - mean, 2 ))
 				.sum() / (testTimes.size() - 1);
@@ -71,16 +72,16 @@ public class Analizador {
 
 	static class TestConfiguration {
 		private int executionTimes;
-		private Function<Integer, Long> executionFunction;
+		private Function executionFunction;
 		private double aproximateCoeficientVariance;
 		private String algorithmType;
 
-		TestConfiguration(int times, Function<Integer, Long> function) {
+		TestConfiguration(int times, Function function) {
 			executionTimes = times;
 			executionFunction = function;
 		}
 
-		TestConfiguration(int times, Function<Integer, Long> function, double aproximateCoeficientVariance, String algorithmType) {
+		TestConfiguration(int times, Function function, double aproximateCoeficientVariance, String algorithmType) {
 			this(times, function);
 			this.aproximateCoeficientVariance = aproximateCoeficientVariance;
 			this.algorithmType = algorithmType;
@@ -90,7 +91,7 @@ public class Analizador {
 			return executionTimes;
 		}
 
-		public Function<Integer, Long> getExecutionFunction() {
+		public Function getExecutionFunction() {
 			return executionFunction;
 		}
 
@@ -116,12 +117,26 @@ public class Analizador {
 		}
 	}
 
+	static class MultiplyBy implements Function {
+
+		int value;
+
+		MultiplyBy(int value) {
+			this.value = value;
+		}
+
+		@Override
+		public long apply(int t) {
+			return t * value;
+		}		
+	}
+
 	// The order of this list is important to determine which type of algorithm is
 	static List<TestConfiguration> configurations = Arrays.asList(
 		// Algorithm NF
 		new TestConfiguration(
 			4, 
-			x -> (long) x * 3, // on more than 4 executions and 3 times x exeeds test time
+			new MultiplyBy(3), // on more than 4 executions and 3 times x exeeds test time
 			1.95, // CoefVariance: 1.95 aprox on NF
 			"NF"
 		),  	
@@ -129,7 +144,7 @@ public class Analizador {
 		// Algorithm 2N
 		new TestConfiguration(
 			5, 
-			x -> (long) x * 5, // on more than 5 executions and 5 times x exeeds test time
+			new MultiplyBy(5), // on more than 5 executions and 5 times x exeeds test time
 			2.04, // CoefVariance: 2.04 aprox on 2N
 			"2N"
 		),  	
@@ -137,7 +152,7 @@ public class Analizador {
 		// Algorithm N3
 		new TestConfiguration(
 			12, 
-			x -> (long) x * 100, 
+			new MultiplyBy(100), 
 			1.22, // CoefVariance: 1.22 aprox on N3
 			"N3"
 		), 		
@@ -145,7 +160,7 @@ public class Analizador {
 		// Algorithm N2
 		new TestConfiguration(
 			12, 
-			x -> (long) x * 3_000, 
+			new MultiplyBy(3_000), 
 			1.04, // CoefVariance: 1.04 aprox on N2
 			"N2"
 		), 		
@@ -153,7 +168,7 @@ public class Analizador {
 		// Algorithm NLogN
 		new TestConfiguration(
 			20, 
-			x -> (long) x * 1_000_000, 
+			new MultiplyBy(1_000_000), 
 			0.82, // CoefVariance: 0.82 aprox on NLogN
 			"NLOGN"
 		), 	
@@ -161,7 +176,7 @@ public class Analizador {
 		// Algorithm N
 		new TestConfiguration(
 			20, 
-			x -> (long) x * 20_000_000, 
+			x -> (long) x * (20_000_000), 
 			0.75, // CoefVariance: 0.75 aprox on N
 			"N"
 		), 	
@@ -169,7 +184,7 @@ public class Analizador {
 		// Algorithm LogN
 		new TestConfiguration(
 			20, 
-			x -> (long) x * 53_000_000, 
+			new MultiplyBy(53_000_000), 
 			0.20, // CoefVariance: 0.20 aprox on LogN
 			"LOGN"
 		), 	
@@ -177,7 +192,7 @@ public class Analizador {
 		// Algorithm 1
 		new TestConfiguration(
 			20, 
-			x -> (long) x * 53_000_000, 
+			new MultiplyBy(53_000_000), 
 			0.09, // CoefVariance: 0.10 aprox on 1
 			"1"
 		) 	
@@ -195,7 +210,7 @@ public class Analizador {
 
 		Map<Double, TestConfiguration> cvDifferenceToAlgorithmRelation = new HashMap<>();
 
-		var algoritmoDesconocido = new AlgoritmoDesconocido();
+		IAlgoritmo algoritmoDesconocido = new AlgoritmoDesconocido();
 
 		int currentConfig = 0;
 		double timeExecuted = 0;
@@ -241,7 +256,7 @@ public class Analizador {
 		// for (int i = 0; i < algoritmos.size(); i++) {
 
 		// 	int timesExecuted = algoritmos.size(); // - i + 1;
-		// 	Function<Integer, Long> functionExecuted = (x) ->(long) x*1000;
+		// 	Function functionExecuted = (x) ->(long) x*1000;
 
 		// 	if (lastTime > 5000) {
 		// 		functionExecuted = (x) -> (long) (100*Math.floor(Math.log(x)));
@@ -275,7 +290,7 @@ public class Analizador {
 		// System.out.println(masCercano(ratio));
 	}
 
-	private static List<Long> tester(IAlgoritmo algoritmo, int nTimes, Function<Integer, Long> function) {
+	private static List<Long> tester(IAlgoritmo algoritmo, int nTimes, Function function) {
 		Temporizador t = new Temporizador();
 		List<Long> testTimes = new ArrayList<>();
 		for (int i = 1; i < nTimes + 1; i++) {
