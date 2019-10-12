@@ -195,7 +195,7 @@ public class Analizador {
 
 		Map<Double, TestConfiguration> cvDifferenceToAlgorithmRelation = new HashMap<>();
 
-		var algoritmoDesconocido = new Algoritmo1();
+		var algoritmoDesconocido = new AlgoritmoDesconocido();
 
 		int currentConfig = 0;
 		double timeExecuted = 0;
