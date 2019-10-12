@@ -1,1 +1,1 @@
-java -cp ".\lib\;.\bin\" ".\src\Analizador.java"
+java -cp ".\lib\;.\bin\" ".\src\Analizador.java" "debug"

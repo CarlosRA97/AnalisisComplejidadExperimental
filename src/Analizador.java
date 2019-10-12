@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 public class Analizador {
@@ -70,10 +72,18 @@ public class Analizador {
 	static class TestConfiguration {
 		private int executionTimes;
 		private Function<Integer, Long> executionFunction;
+		private double aproximateCoeficientVariance;
+		private String algorithmType;
 
 		TestConfiguration(int times, Function<Integer, Long> function) {
 			executionTimes = times;
 			executionFunction = function;
+		}
+
+		TestConfiguration(int times, Function<Integer, Long> function, double aproximateCoeficientVariance, String algorithmType) {
+			this(times, function);
+			this.aproximateCoeficientVariance = aproximateCoeficientVariance;
+			this.algorithmType = algorithmType;
 		}
 
 		public int getExecutionTimes() {
@@ -82,6 +92,14 @@ public class Analizador {
 
 		public Function<Integer, Long> getExecutionFunction() {
 			return executionFunction;
+		}
+
+		public double getAproximateCoeficientVariance() {
+			return aproximateCoeficientVariance;
+		}
+
+		public String getAlgorithmType() {
+			return algorithmType;
 		}
 	}
 
@@ -98,32 +116,76 @@ public class Analizador {
 		}
 	}
 
+	// The order of this list is important to determine which type of algorithm is
+	static List<TestConfiguration> configurations = Arrays.asList(
+		// Algorithm NF
+		new TestConfiguration(
+			4, 
+			x -> (long) x * 3, // on more than 4 executions and 3 times x exeeds test time
+			1.95, // CoefVariance: 1.95 aprox on NF
+			"NF"
+		),  	
+
+		// Algorithm 2N
+		new TestConfiguration(
+			5, 
+			x -> (long) x * 5, // on more than 5 executions and 5 times x exeeds test time
+			2.04, // CoefVariance: 2.04 aprox on 2N
+			"2N"
+		),  	
+
+		// Algorithm N3
+		new TestConfiguration(
+			12, 
+			x -> (long) x * 100, 
+			1.22, // CoefVariance: 1.22 aprox on N3
+			"N3"
+		), 		
+
+		// Algorithm N2
+		new TestConfiguration(
+			12, 
+			x -> (long) x * 3_000, 
+			1.04, // CoefVariance: 1.04 aprox on N2
+			"N2"
+		), 		
+
+		// Algorithm NLogN
+		new TestConfiguration(
+			20, 
+			x -> (long) x * 1_000_000, 
+			0.82, // CoefVariance: 0.82 aprox on NLogN
+			"NLOGN"
+		), 	
+
+		// Algorithm N
+		new TestConfiguration(
+			20, 
+			x -> (long) x * 20_000_000, 
+			0.75, // CoefVariance: 0.75 aprox on N
+			"N"
+		), 	
+
+		// Algorithm LogN
+		new TestConfiguration(
+			20, 
+			x -> (long) x * 53_000_000, 
+			0.20, // CoefVariance: 0.20 aprox on LogN
+			"LOGN"
+		), 	
+
+		// Algorithm 1
+		new TestConfiguration(
+			20, 
+			x -> (long) x * 53_000_000, 
+			0.09, // CoefVariance: 0.10 aprox on 1
+			"1"
+		) 	
+	);
+
 	public static void main(String arg[]) {
 		
-		Function<Integer, Long> testValuesSqrt100 		= (x) -> 
-			(long) Math.floor(10 * Math.sqrt(100 * x));
-		Function<Integer, Long> testValuesExp5 		= (x) -> // Tiene buena pinta esta funcion
-			(long) Math.pow(5, x);
 		
-
-		List<TestConfiguration> configurations = Arrays.asList(
-			// Algorithm NF
-			new TestConfiguration(4, x -> (long) x * 3),  // CoefVariance: 1.95 aprox on NF, on more than 4 executions and 3 times x exeeds test time
-			// Algorithm 2N
-			new TestConfiguration(5, x -> (long) x * 5),  // CoefVariance: 2.04 aprox on 2N, on more than 5 executions and 5 times x exeeds test time
-			// Algorithm N3
-			new TestConfiguration(12, x -> (long) x * 100), // CoefVariance: 1.22 aprox on N3
-			// Algorithm N2
-			new TestConfiguration(12, x -> (long) x * 3_000), // CoefVariance: 1.04 aprox on N2
-			// Algorithm NLogN
-			new TestConfiguration(20, x -> (long) x * 1_000_000), // CoefVariance: 0.82 aprox on NLogN
-			// Algorithm N
-			new TestConfiguration(20, x -> (long) x * 20_000_000), // CoefVariance: 0.75 aprox on N
-			// Algorithm LogN
-			new TestConfiguration(30, x -> (long) x * 53_000_000), // CoefVariance: ~ 0.16 ~ aprox on LogN
-			// Algorithm 1
-			new TestConfiguration(20, testValuesExp5)
-		);
 
 		Temporizador algoritmoTimer = new Temporizador(Temporizador.MILIS);
 
@@ -131,22 +193,42 @@ public class Analizador {
  * 					INDIVIDUAL TESTS
  */
 
-		System.out.println("\nIndividual Test\n");
+		Map<Double, TestConfiguration> cvDifferenceToAlgorithmRelation = new HashMap<>();
 
-		var index = 6;
+		var algoritmoDesconocido = new Algoritmo1();
 
-		var algoritmoDesconocido = getAlgoritmos().get(getAlgoritmos().size() - index - 1);
+		int currentConfig = 0;
+		double timeExecuted = 0;
+		double cv = 0;
+		double cvDifference = 0;
+		TestConfiguration config;
+		do {
+			config = configurations.get(currentConfig);
 
-		algoritmoTimer.iniciar();
-		List<Long> testTimesResult = tester(algoritmoDesconocido, configurations.get(index));
-		algoritmoTimer.parar();
+			algoritmoTimer.iniciar();
+			List<Long> testTimesResult = tester(algoritmoDesconocido, config);
+			algoritmoTimer.parar();
+			
+			timeExecuted = (algoritmoTimer.tiempoPasado());
+			cv = Statistic.coefVariacion(testTimesResult);
+			cvDifference = Math.abs(config.getAproximateCoeficientVariance() - cv);
+			cvDifferenceToAlgorithmRelation.put(cvDifference, config);
+			if (arg.length > 0 && arg[0].equals("debug")) {
+				log(testTimesResult, algoritmoDesconocido, timeExecuted, config);
+				System.out.println("Difference in CV: " + cvDifference);
+			}
 
-		double timeExecuted = (double) (algoritmoTimer.tiempoPasado() / 1_000.0);
-		System.out.println(" [" + algoritmoDesconocido + "] Tiempo de la prueba: " + timeExecuted + "s");
-		Statistic.getResults(testTimesResult);
-		System.out.println(masCercano(Statistic.coefVariacion(testTimesResult)));
+			algoritmoTimer.reiniciar();
+			currentConfig++;
+		} while (currentConfig < configurations.size() && timeExecuted < 600.0);
 
-		algoritmoTimer.reiniciar();
+		if (currentConfig == configurations.size()) {
+			config = cvDifferenceToAlgorithmRelation.get(cvDifferenceToAlgorithmRelation.keySet().stream().min(Double::compare).get());
+		}
+
+		System.out.println(config.getAlgorithmType());
+
+		
 
 /**
  * 					MULTIPLE TESTS
@@ -211,7 +293,14 @@ public class Analizador {
 		return tester(algoritmo, configuration.getExecutionTimes(), configuration.getExecutionFunction());
 	}
 	
-	private static List<IAlgoritmo> getAlgoritmos ()
+	private static void log(List<Long> testTimesResult, IAlgoritmo algoritmoDesconocido, double timeExecuted, TestConfiguration config) {
+		System.out.println();
+		System.out.println("Expected CV: " + config.getAproximateCoeficientVariance());
+		System.out.println(" [" + algoritmoDesconocido + "] Tiempo de la prueba: " + timeExecuted + "ms");
+		Statistic.getResults(testTimesResult);
+	}
+
+	private static List<IAlgoritmo> getAlgoritmos()
 	{
 		return Arrays.asList(
 			new Algoritmo1(), 
