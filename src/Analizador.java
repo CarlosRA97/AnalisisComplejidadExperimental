@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Collections;
 
-import javax.lang.model.util.ElementScanner6;
-
 public class Analizador {
 	
 	/* 
@@ -86,7 +84,7 @@ public class Analizador {
 			return Math.sqrt(variance);
 
 			// Unsupported Code only Java 8 and above
-			
+
 			// double variance = testTimes.stream()
 			// 	.mapToDouble(x -> (double) x)
 			// 	.map(x -> Math.pow( x - mean, 2 ))
