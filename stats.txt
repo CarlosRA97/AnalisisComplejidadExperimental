@@ -1,0 +1,163 @@
+
+Expected CV: 1.95
+ [AlgoritmoLogN] Tiempo de la prueba: 10.0ms
+ / ********   STATS   ******* /  Tiempos: [0.0020278, 0.0026838, 0.0028279, 0.0029255] Media: 2616250.0 Desviacion estandar: 404667.63728604076 Coeficiente de Variacion: 0.1546746821924666 / ************************ / 
+Difference in CV: 1.7953253178075332
+
+Expected CV: 2.04
+ [AlgoritmoLogN] Tiempo de la prueba: 1.0ms
+ / ********   STATS   ******* /  Tiempos: [5.2E-4, 6.223E-4, 7.417E-4, 8.212E-4, 9.503E-4] Media: 731100.0 Desviacion estandar: 167838.95554965778 Coeficiente de Variacion: 0.22957044939086005 / ************************ / 
+Difference in CV: 1.81042955060914
+
+Expected CV: 1.22
+ [AlgoritmoLogN] Tiempo de la prueba: 2.0ms
+ / ********   STATS   ******* /  Tiempos: [3.311E-4, 4.761E-4, 5.588E-4, 6.413E-4, 7.313E-4, 8.122E-4, 9.055E-4, 9.932E-4, 0.001072, 0.0011508, 0.0012767, 0.0013547] Media: 858641.0 Desviacion estandar: 323641.2223957544 Coeficiente de Variacion: 0.37692262819473377 / ************************ / 
+Difference in CV: 0.8430773718052662
+
+Expected CV: 1.04
+ [AlgoritmoLogN] Tiempo de la prueba: 2.0ms
+ / ********   STATS   ******* /  Tiempos: [3.768E-4, 4.514E-4, 5.187E-4, 5.846E-4, 6.638E-4, 7.435E-4, 8.204E-4, 8.935E-4, 9.665E-4, 0.0010507, 0.0011507, 0.0012259] Media: 787208.0 Desviacion estandar: 277986.04758447205 Coeficiente de Variacion: 0.3531290936886719 / ************************ / 
+Difference in CV: 0.6868709063113281
+
+Expected CV: 0.82
+ [AlgoritmoLogN] Tiempo de la prueba: 2.0ms
+ / ********   STATS   ******* /  Tiempos: [3.477E-4, 4.278E-4, 5.21E-4, 5.947E-4, 6.684E-4, 7.45E-4, 8.16E-4, 8.889E-4, 9.63E-4, 0.0010378, 0.0011189, 0.0011919, 0.0012908, 0.0013704, 0.0014454, 0.0015168, 0.0015847, 0.001658, 0.0017293, 0.0018209] Media: 1086870.0 Desviacion estandar: 455287.6651085553 Coeficiente de Variacion: 0.4188979961803668 / ************************ / 
+Difference in CV: 0.4011020038196331
+
+Expected CV: 0.75
+ [AlgoritmoLogN] Tiempo de la prueba: 1.0ms
+ / ********   STATS   ******* /  Tiempos: [3.71E-4, 4.297E-4, 4.674E-4, 5.07E-4, 5.587E-4, 6.022E-4, 6.396E-4, 6.764E-4, 7.206E-4, 7.718E-4, 8.141E-4, 8.527E-4, 8.889E-4, 9.437E-4, 9.817E-4, 0.0010194, 0.0010606, 0.0011088, 0.0011539, 0.0011954] Media: 788180.0 Desviacion estandar: 253172.7382014522 Coeficiente de Variacion: 0.3212118275031746 / ************************ / 
+Difference in CV: 0.4287881724968254
+
+Expected CV: 0.2
+ [AlgoritmoLogN] Tiempo de la prueba: 7.0ms
+ / ********   STATS   ******* /  Tiempos: [3.726E-4, 4.75E-4, 5.549E-4, 6.307E-4, 7.017E-4, 7.714E-4, 8.411E-4, 9.108E-4, 0.0052413, 0.0053538, 0.0054553, 0.0055419, 0.0056345, 0.0057219, 0.0058053, 0.005887, 0.0059715, 0.0060528, 0.0061378, 0.0062184] Media: 3713985.0 Desviacion estandar: 2574271.032488717 Coeficiente de Variacion: 0.6931290870826665 / ************************ / 
+Difference in CV: 0.4931290870826665
+LOGN
+
+Expected CV: 1.95
+ [AlgoritmoN] Tiempo de la prueba: 10004.0ms
+ / ********   STATS   ******* /  Tiempos: [3.84E-4, 4.786E-4, 5.51E-4, 6.222E-4] Media: 508950.0 Desviacion estandar: 101861.65454510675 Coeficiente de Variacion: 0.20014078896769183 / ************************ / 
+Difference in CV: 1.7498592110323081
+NF
+
+Expected CV: 1.95
+ [AlgoritmoN3] Tiempo de la prueba: 1.0ms
+ / ********   STATS   ******* /  Tiempos: [2.934E-4, 3.712E-4, 4.613E-4, 5.796E-4] Media: 426375.0 Desviacion estandar: 123050.51469484663 Coeficiente de Variacion: 0.2885969268715254 / ************************ / 
+Difference in CV: 1.6614030731284746
+
+Expected CV: 2.04
+ [AlgoritmoN3] Tiempo de la prueba: 1.0ms
+ / ********   STATS   ******* /  Tiempos: [5.167E-4, 6.161E-4, 7.655E-4, 0.0010076, 0.0013745] Media: 856080.0 Desviacion estandar: 343762.82812427526 Coeficiente de Variacion: 0.40155456046663307 / ************************ / 
+Difference in CV: 1.638445439533367
+
+Expected CV: 1.22
+ [AlgoritmoN3] Tiempo de la prueba: 4250.0ms
+ / ********   STATS   ******* /  Tiempos: [0.0068477, 0.0143176, 0.0347343, 0.0786643, 0.1664938, 0.3476773, 0.6083633, 0.9850271, 1.483798, 2.1502301, 3.0494981, 4.250689] Media: 1.098028383E9 Desviacion estandar: 1.3889687498401735E9 Coeficiente de Variacion: 1.2649661623912445 / ************************ / 
+Difference in CV: 0.04496616239124451
+N3
+
+Expected CV: 1.95
+ [AlgoritmoNLogN] Tiempo de la prueba: 0.0ms
+ / ********   STATS   ******* /  Tiempos: [3.365E-4, 4.399E-4, 5.246E-4, 5.956E-4] Media: 474150.0 Desviacion estandar: 111677.94470410589 Coeficiente de Variacion: 0.2355329425373951 / ************************ / 
+Difference in CV: 1.7144670574626049
+
+Expected CV: 2.04
+ [AlgoritmoNLogN] Tiempo de la prueba: 0.0ms
+ / ********   STATS   ******* /  Tiempos: [4.451E-4, 5.269E-4, 5.918E-4, 6.569E-4, 7.251E-4] Media: 589160.0 Desviacion estandar: 109207.31660470374 Coeficiente de Variacion: 0.18536105065636455 / ************************ / 
+Difference in CV: 1.8546389493436355
+
+Expected CV: 1.22
+ [AlgoritmoNLogN] Tiempo de la prueba: 3.0ms
+ / ********   STATS   ******* /  Tiempos: [2.761E-4, 3.838E-4, 5.131E-4, 6.685E-4, 0.0010466, 0.0012855, 0.0015741, 0.0018998, 0.0022496, 0.0026354, 0.0031656, 0.0035578] Media: 1604658.0 Desviacion estandar: 1110055.9891353557 Coeficiente de Variacion: 0.6917710746684688 / ************************ / 
+Difference in CV: 0.5282289253315312
+
+Expected CV: 1.04
+ [AlgoritmoNLogN] Tiempo de la prueba: 9.0ms
+ / ********   STATS   ******* /  Tiempos: [4.668E-4, 8.491E-4, 0.0013869, 0.0020866, 0.0029848, 0.0040472, 0.0052786, 0.0060235, 0.0068172, 0.0076235, 0.0084024, 0.0089716] Media: 4578183.0 Desviacion estandar: 3027390.7474719724 Coeficiente de Variacion: 0.6612646867702694 / ************************ / 
+Difference in CV: 0.37873531322973064
+
+Expected CV: 0.82
+ [AlgoritmoNLogN] Tiempo de la prueba: 3968.0ms
+ / ********   STATS   ******* /  Tiempos: [0.0149718, 0.0458034, 0.0946258, 0.1590291, 0.2643166, 0.3935655, 0.5226184, 0.6666974, 0.8406612, 1.0198617, 1.2163714, 1.4488836, 1.7058365, 1.9790156, 2.2583761, 2.54633, 2.8748573, 3.2028343, 3.5632497, 3.9671168] Media: 1.43925111E9 Desviacion estandar: 1.2616587266548817E9 Coeficiente de Variacion: 0.876607784346181 / ************************ / 
+Difference in CV: 0.05660778434618108
+NLOGN
+
+Expected CV: 1.95
+ [Algoritmo2N] Tiempo de la prueba: 1.0ms
+ / ********   STATS   ******* /  Tiempos: [4.605E-4, 5.508E-4, 6.708E-4, 0.0010529] Media: 683750.0 Desviacion estandar: 260739.7744878982 Coeficiente de Variacion: 0.38133787859290413 / ************************ / 
+Difference in CV: 1.5686621214070957
+
+Expected CV: 2.04
+ [Algoritmo2N] Tiempo de la prueba: 1254.0ms
+ / ********   STATS   ******* /  Tiempos: [4.896E-4, 6.578E-4, 0.002402, 0.03153, 1.2547251] Media: 2.579609E8 Desviacion estandar: 5.573635550157007E8 Coeficiente de Variacion: 2.1606513041926148 / ************************ / 
+Difference in CV: 0.12065130419261472
+2N
+
+Expected CV: 1.95
+ [Algoritmo1] Tiempo de la prueba: 1.0ms
+ / ********   STATS   ******* /  Tiempos: [6.135E-4, 6.872E-4, 7.733E-4, 8.418E-4] Media: 728950.0 Desviacion estandar: 99622.3033930321 Coeficiente de Variacion: 0.1366654823966419 / ************************ / 
+Difference in CV: 1.8133345176033582
+
+Expected CV: 2.04
+ [Algoritmo1] Tiempo de la prueba: 1.0ms
+ / ********   STATS   ******* /  Tiempos: [4.728E-4, 5.388E-4, 6.035E-4, 6.565E-4, 7.157E-4] Media: 597460.0 Desviacion estandar: 95503.94232700554 Coeficiente de Variacion: 0.15984993527098976 / ************************ / 
+Difference in CV: 1.8801500647290104
+
+Expected CV: 1.22
+ [Algoritmo1] Tiempo de la prueba: 1.0ms
+ / ********   STATS   ******* /  Tiempos: [2.477E-4, 3.045E-4, 3.582E-4, 4.115E-4, 4.657E-4, 5.717E-4, 6.425E-4, 7.045E-4, 7.773E-4, 8.417E-4, 9.027E-4, 9.656E-4] Media: 599466.0 Desviacion estandar: 243486.10687862476 Coeficiente de Variacion: 0.4061716709181584 / ************************ / 
+Difference in CV: 0.8138283290818416
+
+Expected CV: 1.04
+ [Algoritmo1] Tiempo de la prueba: 1.0ms
+ / ********   STATS   ******* /  Tiempos: [2.465E-4, 3.364E-4, 3.98E-4, 4.592E-4, 5.195E-4, 5.804E-4, 6.414E-4, 7.019E-4, 7.624E-4, 8.228E-4, 8.831E-4, 9.41E-4] Media: 607716.0 Desviacion estandar: 222743.93710185774 Coeficiente de Variacion: 0.3665263661016951 / ************************ / 
+Difference in CV: 0.673473633898305
+
+Expected CV: 0.82
+ [Algoritmo1] Tiempo de la prueba: 2.0ms
+ / ********   STATS   ******* /  Tiempos: [3.025E-4, 3.354E-4, 3.626E-4, 4.077E-4, 4.875E-4, 5.48E-4, 6.081E-4, 6.712E-4, 7.343E-4, 7.943E-4, 8.539E-4, 9.127E-4, 9.725E-4, 0.0010323, 0.0010923, 0.0011518, 0.0012158, 0.0012745, 0.0013348, 0.0013947] Media: 824345.0 Desviacion estandar: 352576.66202581127 Coeficiente de Variacion: 0.42770522296588354 / ************************ / 
+Difference in CV: 0.3922947770341164
+
+Expected CV: 0.75
+ [Algoritmo1] Tiempo de la prueba: 2.0ms
+ / ********   STATS   ******* /  Tiempos: [2.549E-4, 3.158E-4, 3.794E-4, 4.329E-4, 5.137E-4, 5.805E-4, 6.377E-4, 6.937E-4, 7.516E-4, 8.081E-4, 8.672E-4, 9.254E-4, 9.831E-4, 0.0010395, 0.0010963, 0.0011528, 0.0012106, 0.0012817, 0.0013447, 0.0014039] Media: 833675.0 Desviacion estandar: 353640.9372513312 Coeficiente de Variacion: 0.42419520466768373 / ************************ / 
+Difference in CV: 0.32580479533231627
+
+Expected CV: 0.2
+ [Algoritmo1] Tiempo de la prueba: 2.0ms
+ / ********   STATS   ******* /  Tiempos: [3.435E-4, 4.068E-4, 4.652E-4, 5.229E-4, 5.815E-4, 6.395E-4, 6.99E-4, 7.575E-4, 8.196E-4, 8.784E-4, 9.462E-4, 0.0010061, 0.0010629, 0.0011201, 0.0011868, 0.001246, 0.0013059, 0.0013638, 0.0014223, 0.001481] Media: 912750.0 Desviacion estandar: 355294.46719735535 Coeficiente de Variacion: 0.38925715387275306 / ************************ / 
+Difference in CV: 0.18925715387275305
+
+Expected CV: 0.3
+ [Algoritmo1] Tiempo de la prueba: 2.0ms
+ / ********   STATS   ******* /  Tiempos: [4.441E-4, 5.008E-4, 5.287E-4, 5.556E-4, 5.796E-4, 6.283E-4, 6.895E-4, 7.525E-4, 8.182E-4, 8.778E-4, 9.364E-4, 9.948E-4, 0.0010528, 0.0011217, 0.0011797, 0.0012392, 0.0012972, 0.0013546, 0.0014121, 0.0015833, 0.0016296, 0.001668, 0.0017026, 0.0017379, 0.0017721, 0.0018059, 0.0018399, 0.001874, 0.0019097, 0.0019441] Media: 1214356.0 Desviacion estandar: 500682.3596845712 Coeficiente de Variacion: 0.4123027840967321 / ************************ / 
+Difference in CV: 0.11230278409673211
+1
+
+Expected CV: 1.95
+ [AlgoritmoN2] Tiempo de la prueba: 2.0ms
+ / ********   STATS   ******* /  Tiempos: [0.001952, 0.0020003, 0.0020252, 0.0020512] Media: 2007175.0 Desviacion estandar: 42247.869768782424 Coeficiente de Variacion: 0.021048423664494838 / ************************ / 
+Difference in CV: 1.9289515763355052
+
+Expected CV: 2.04
+ [AlgoritmoN2] Tiempo de la prueba: 1.0ms
+ / ********   STATS   ******* /  Tiempos: [8.863E-4, 9.583E-4, 0.0010742, 0.0011515, 0.0012306] Media: 1060180.0 Desviacion estandar: 139814.75959282697 Coeficiente de Variacion: 0.13187832216494083 / ************************ / 
+Difference in CV: 1.9081216778350591
+
+Expected CV: 1.22
+ [AlgoritmoN2] Tiempo de la prueba: 12.0ms
+ / ********   STATS   ******* /  Tiempos: [5.974E-4, 0.0013736, 0.0021923, 0.0032556, 0.0046122, 0.0056929, 0.0065026, 0.0075332, 0.0088098, 0.0094955, 0.010323, 0.0115432] Media: 5994275.0 Desviacion estandar: 3652820.5894088326 Coeficiente de Variacion: 0.6093848863138299 / ************************ / 
+Difference in CV: 0.61061511368617
+
+Expected CV: 1.04
+ [AlgoritmoN2] Tiempo de la prueba: 7258.0ms
+ / ********   STATS   ******* /  Tiempos: [0.0068604, 0.038316, 0.0926982, 0.1981779, 0.3557643, 0.5823541, 1.060893, 2.0648811, 2.7853298, 3.9799119, 5.4323514, 7.2578822] Media: 1.987951691E9 Desviacion estandar: 2.4170972168865438E9 Coeficiente de Variacion: 1.2158732165521942 / ************************ / 
+Difference in CV: 0.17587321655219412
+N2
+
+Expected CV: 1.95
+ [AlgoritmoNF] Tiempo de la prueba: 2821.0ms
+ / ********   STATS   ******* /  Tiempos: [0.0033117, 0.0036968, 0.0238994, 2.8209577] Media: 7.129664E8 Desviacion estandar: 1.4053604294605873E9 Coeficiente de Variacion: 1.9711453856178738 / ************************ / 
+Difference in CV: 0.021145385617873824
+NF

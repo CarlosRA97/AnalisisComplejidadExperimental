@@ -3,6 +3,17 @@
  */
 public class AlgoritmoNLogN implements IAlgoritmo {
     long l = 0L;
+    
+    long value;
+
+	public void setValue(long value) {
+		this.value = value;
+	}
+	
+	@Override
+	public void run() {
+		f(value);
+	}
 
     @Override
     public synchronized void f(long n) {
