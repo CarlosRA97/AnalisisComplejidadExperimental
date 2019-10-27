@@ -1,11 +1,5 @@
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -89,14 +83,14 @@ public class Analizador {
 		}
 
 		public static String getResults(List<Long> testTimesResult) {
-			StringBuilder sb = new StringBuilder();
-			sb.append(" / ********   STATS   ******* / ");
-			sb.append(" Tiempos: "
+			StringJoiner sb = new StringJoiner("\n");
+			sb.add(" / ********   STATS   ******* / ");
+			sb.add(" Tiempos: "
 					+ Arrays.toString(testTimesResult.stream().map(x -> (double) x / 1_000_000_000).toArray()));
-			sb.append(" Media: " + mean(testTimesResult));
-			sb.append(" Desviacion estandar: " + standardDeviation(testTimesResult));
-			sb.append(" Coeficiente de Variacion: " + coefVariacion(testTimesResult));
-			sb.append(" / ************************ / ");
+			sb.add(" Media: " + mean(testTimesResult));
+			sb.add(" Desviacion estandar: " + standardDeviation(testTimesResult));
+			sb.add(" Coeficiente de Variacion: " + coefVariacion(testTimesResult));
+			sb.add(" / ************************ / ");
 			return sb.toString();
 		}
 
@@ -242,11 +236,11 @@ public class Analizador {
 					"N"),
 
 			// Algorithm LogN
-			new TestConfiguration(20, new MultiplyBy(53_000_000), 0.20, // CoefVariance: 0.20 aprox on LogN
+			new TestConfiguration(20, new MultiplyBy(53_900_000), 0.38, // CoefVariance: 0.20 aprox on LogN MultplyBy 53_000_000
 					"LOGN"),
 
 			// Algorithm 1
-			new TestConfiguration(30, new MultiplyBy(60_000_000), 0.30, // CoefVariance: 0.10 aprox on 1
+			new TestConfiguration(30, new MultiplyBy(100_000_000), 0.30, // CoefVariance: 0.10 aprox on 1
 					"1"));
 
 	public static void main(String arg[]) throws FileNotFoundException {
@@ -262,13 +256,13 @@ public class Analizador {
 		}
 
 		if (isDebug) {
-//			List<IAlgoritmo> algoritmos = getAlgoritmos();
-//			Collections.shuffle(algoritmos);
-//			for (IAlgoritmo algoritmo : algoritmos) {
-//				individualTest(algoritmo, isDebug, algoritmoTimer, out);
-//			}
+			List<IAlgoritmo> algoritmos = getAlgoritmos();
+			Collections.shuffle(algoritmos);
+			for (IAlgoritmo algoritmo : algoritmos) {
+				individualTest(algoritmo, isDebug, algoritmoTimer, out);
+			}
 		} else {
-			IAlgoritmo algoritmo = new AlgoritmoDesconocido();
+			IAlgoritmo algoritmo = new AlgoritmoLogN();
 			individualTest(algoritmo, isDebug, algoritmoTimer, out);
 		}
 		out.close();
@@ -300,7 +294,8 @@ public class Analizador {
 				timeExecuted = algoritmoTimer.tiempoPasado();
 				
 				cv = Statistic.coefVariacion(testTimesResult);
-				cvDifferenceToAlgorithmRelation.put(config.getDifferenceCV(cv), config);
+				cvDifference = config.getDifferenceCV(cv);
+				cvDifferenceToAlgorithmRelation.put(cvDifference, config);
 
 				if (isDebug) {
 //					try {
@@ -318,11 +313,14 @@ public class Analizador {
 			} catch (ExecutionException e) {
 				e.printStackTrace(out);
 			} catch (TimeoutException e) {
+				currentConfig--;
 				if (isDebug) {
 					e.printStackTrace(out);
 				}
-				if (cvDifference < 1.0) {
-					currentConfig--;
+				if (cvDifference < 1.0 && timeExecuted > 1000) {
+					if (!(cvDifference == Collections.min(cvDifferenceToAlgorithmRelation.keySet()))) {
+						currentConfig--;
+					}
 				} else {
 					currentConfig++;
 				}
@@ -357,10 +355,10 @@ public class Analizador {
 		out.println(log(testTimesResult, algoritmo, timeExecuted, config));
 	}
 
-//	private static List<IAlgoritmo> getAlgoritmos() {
-//		return Arrays.asList(new Algoritmo1(), new AlgoritmoLogN(), new AlgoritmoN(), new AlgoritmoNLogN(),
-//				new AlgoritmoN2(), new AlgoritmoN3(), new Algoritmo2N(), new AlgoritmoNF());
-//	}
+	private static List<IAlgoritmo> getAlgoritmos() {
+		return Arrays.asList(new Algoritmo1(), new AlgoritmoLogN(), new AlgoritmoN(), new AlgoritmoNLogN(),
+				new AlgoritmoN2(), new AlgoritmoN3(), new Algoritmo2N(), new AlgoritmoNF());
+	}
 	
 //	private static void sendLog(List<Long> testTimesResult, IAlgoritmo algoritmo, double timeExecuted,
 //			TestConfiguration config) throws Exception {
