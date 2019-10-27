@@ -236,7 +236,7 @@ public class Analizador {
 					"N"),
 
 			// Algorithm LogN
-			new TestConfiguration(20, new MultiplyBy(53_900_000), 0.38, // CoefVariance: 0.20 aprox on LogN MultplyBy 53_000_000
+			new TestConfiguration(20, new MultiplyBy(53_000_000), 0.38, // CoefVariance: 0.20 aprox on LogN MultplyBy 53_000_000
 					"LOGN"),
 
 			// Algorithm 1
@@ -262,7 +262,7 @@ public class Analizador {
 				individualTest(algoritmo, isDebug, algoritmoTimer, out);
 			}
 		} else {
-			IAlgoritmo algoritmo = new AlgoritmoLogN();
+			IAlgoritmo algoritmo = new AlgoritmoDesconocido();
 			individualTest(algoritmo, isDebug, algoritmoTimer, out);
 		}
 		out.close();
@@ -298,11 +298,6 @@ public class Analizador {
 				cvDifferenceToAlgorithmRelation.put(cvDifference, config);
 
 				if (isDebug) {
-//					try {
-//						sendLog(testTimesResult, algoritmo, timeExecuted, config);
-//					} catch (Exception e) {
-//						e.printStackTrace();
-//					}
 					printLog(testTimesResult, algoritmo, timeExecuted, config, out);
 				}
 
@@ -317,13 +312,13 @@ public class Analizador {
 				if (isDebug) {
 					e.printStackTrace(out);
 				}
-				if (cvDifference < 1.0 && timeExecuted > 1000) {
-					if (!(cvDifference == Collections.min(cvDifferenceToAlgorithmRelation.keySet()))) {
-						currentConfig--;
-					}
-				} else {
-					currentConfig++;
-				}
+				// if (cvDifference < 1.0 && timeExecuted > 1000) {
+				// 	if (!(cvDifference == Collections.min(cvDifferenceToAlgorithmRelation.keySet()))) {
+				// 		currentConfig--;
+				// 	}
+				// } else {
+				// 	currentConfig++;
+				// }
 				config = configurations.get(currentConfig);
 				end = true;
 			} finally {
